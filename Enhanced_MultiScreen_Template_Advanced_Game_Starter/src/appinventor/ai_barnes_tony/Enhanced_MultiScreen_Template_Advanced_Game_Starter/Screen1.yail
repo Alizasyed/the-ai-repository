@@ -1,0 +1,1593 @@
+#|
+$Source $Yail
+|#
+
+(define-form appinventor.ai_barnes_tony.Enhanced_MultiScreen_Template_Advanced_Game_Starter.Screen1 Screen1)
+(require <com.google.youngandroid.runtime>)
+(def (WebButtonClick)
+(set-and-coerce-property! 'varHelp 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'vartAIRHelpButtons 'Visible #f 'boolean)
+
+(set-and-coerce-property! 'lblLoading 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'btnCloseWebsite 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'tmrWebview 'TimerEnabled #t 'boolean)
+
+(set-and-coerce-property! 'btnHelpClose 'Visible #f 'boolean)
+
+ )
+(def (DrawCanvas)
+(call-component-type-method (get-component cnvSlider)
+ 'Canvas 'Clear (*list-for-runtime*)
+ '( component)
+)
+
+(call-component-method 'cnvSlider 'DrawLine (*list-for-runtime* 15 (call-yail-primitive yail-divide (*list-for-runtime* (get-property 'cnvSlider 'Height)
+ 2)
+ '( number number)
+ "\/")
+ (call-yail-primitive - (*list-for-runtime* (get-property 'cnvSlider 'Width)
+ 15)
+ '( number number)
+ "\u2212")
+ (call-yail-primitive yail-divide (*list-for-runtime* (get-property 'cnvSlider 'Height)
+ 2)
+ '( number number)
+ "\/")
+)
+ '( number number number number)
+)
+
+(call-component-method 'cnvSlider 'DrawLine (*list-for-runtime* 15 20 15 60)
+ '( number number number number)
+)
+
+(call-component-method 'cnvSlider 'DrawLine (*list-for-runtime* (call-yail-primitive yail-divide (*list-for-runtime* (get-property 'cnvSlider 'Width)
+ 2)
+ '( number number)
+ "\/")
+ 20 (call-yail-primitive yail-divide (*list-for-runtime* (get-property 'cnvSlider 'Width)
+ 2)
+ '( number number)
+ "\/")
+ 60)
+ '( number number number number)
+)
+
+(call-component-method 'cnvSlider 'DrawLine (*list-for-runtime* (call-yail-primitive - (*list-for-runtime* (get-property 'cnvSlider 'Width)
+ 15)
+ '( number number)
+ "\u2212")
+ 20 (call-yail-primitive - (*list-for-runtime* (get-property 'cnvSlider 'Width)
+ 15)
+ '( number number)
+ "\u2212")
+ 60)
+ '( number number number number)
+)
+
+ )
+(def (SortGlobalHS)
+(set-var! Swap  #t)
+
+(while  (get-var Swap)
+ (begin (set-var! Swap  #f)
+
+(set-var! ITEM_ON  1)
+
+(set-var! TimesThruList  (call-yail-primitive + (*list-for-runtime* (get-var TimesThruList)
+ 1)
+ '( number number)
+ "+")
+)
+
+(while  (call-yail-primitive < (*list-for-runtime* (get-var ITEM_ON)
+ (call-yail-primitive - (*list-for-runtime* (call-yail-primitive yail-list-length (*list-for-runtime* (get-var SCORELIST)
+)
+ '( list)
+ "length of list")
+ (get-var TimesThruList)
+)
+ '( number number)
+ "\u2212")
+)
+ '( number number)
+ "<")
+ (begin (if (call-yail-primitive < (*list-for-runtime* (call-yail-primitive yail-list-get-item (*list-for-runtime* (get-var SCORELIST)
+ (get-var ITEM_ON)
+)
+ '( list number)
+ "select list item")
+ (call-yail-primitive yail-list-get-item (*list-for-runtime* (get-var SCORELIST)
+ (call-yail-primitive + (*list-for-runtime* (get-var ITEM_ON)
+ 1)
+ '( number number)
+ "+")
+)
+ '( list number)
+ "select list item")
+)
+ '( number number)
+ "<")
+ (begin ((get-var DoSwap))
+
+(set-var! Swap  #t)
+
+)
+)
+
+(set-var! ITEM_ON  (call-yail-primitive + (*list-for-runtime* (get-var ITEM_ON)
+ 1)
+ '( number number)
+ "+")
+)
+
+)
+)
+
+)
+)
+
+(set-var! TimesThruList  -1)
+
+ )
+(def (PRINTOUT)
+(set-var! I_COUNTER  0)
+
+(set-and-coerce-property! 'lblScoreSpacer 'Text "" 'text)
+
+(set-and-coerce-property! 'lblNames 'Text "" 'text)
+
+(set-and-coerce-property! 'lblScores 'Text "" 'text)
+
+(set-var! PlayerOut  "")
+
+(set-var! ScoreOut  "")
+
+(foreach  ItemToPrint  (begin (set-var! I_COUNTER  (call-yail-primitive + (*list-for-runtime* (get-var I_COUNTER)
+ 1)
+ '( number number)
+ "+")
+)
+
+(set-var! PlayerOut  (call-yail-primitive string-append (*list-for-runtime* (get-var PlayerOut)
+ "\n" (call-yail-primitive string-append (*list-for-runtime* (get-var I_COUNTER)
+ ". ")
+ '( text text)
+ "join")
+ (call-yail-primitive yail-list-get-item (*list-for-runtime* (get-var PLAYERLIST)
+ (get-var I_COUNTER)
+)
+ '( list number)
+ "select list item")
+)
+ '( text text text text)
+ "make text")
+)
+
+(set-var! ScoreOut  (call-yail-primitive string-append (*list-for-runtime* (get-var ScoreOut)
+ "\n" "<< " (lexical-value ItemToPrint)
+ " >>")
+ '( text text text text text)
+ "make text")
+)
+
+(set-and-coerce-property! 'lblScoreSpacer 'Text (call-yail-primitive string-append (*list-for-runtime* (get-property 'lblScoreSpacer 'Text)
+ "\n" ".......")
+ '( text text text)
+ "make text")
+ 'text)
+
+)
+  (get-var SCORELIST)
+)
+
+(if (call-yail-primitive > (*list-for-runtime* (call-yail-primitive yail-list-length (*list-for-runtime* (get-var PLAYERLIST)
+)
+ '( list)
+ "length of list")
+ 10)
+ '( number number)
+ ">")
+ (begin (call-yail-primitive yail-list-remove-item! (*list-for-runtime* (get-var PLAYERLIST)
+ (call-yail-primitive yail-list-length (*list-for-runtime* (get-var PLAYERLIST)
+)
+ '( list)
+ "length of list")
+)
+ '( list number)
+ "remove list item")
+
+(call-yail-primitive yail-list-remove-item! (*list-for-runtime* (get-var SCORELIST)
+ (call-yail-primitive yail-list-length (*list-for-runtime* (get-var SCORELIST)
+)
+ '( list)
+ "length of list")
+)
+ '( list number)
+ "remove list item")
+
+)
+)
+
+(if (call-yail-primitive >= (*list-for-runtime* (call-yail-primitive yail-list-length (*list-for-runtime* (get-var SCORELIST)
+)
+ '( list)
+ "length of list")
+ 2)
+ '( number number)
+ ">=")
+ (begin (call-component-method 'twdHighScore 'StoreValue (*list-for-runtime* (call-yail-primitive string-append (*list-for-runtime* (get-var APPNAME)
+ "PLAYERS")
+ '( text text)
+ "join")
+ (get-var PLAYERLIST)
+)
+ '( text any)
+)
+
+(call-component-method 'twdHighScore 'StoreValue (*list-for-runtime* (call-yail-primitive string-append (*list-for-runtime* (get-var APPNAME)
+ "SCORES")
+ '( text text)
+ "join")
+ (get-var SCORELIST)
+)
+ '( text any)
+)
+
+)
+)
+
+(set-and-coerce-property! 'lblNames 'Text (get-var PlayerOut)
+ 'text)
+
+(set-and-coerce-property! 'lblScores 'Text (get-var ScoreOut)
+ 'text)
+
+ )
+(def APPNAME "APPNAME")
+
+(def (initsounds)
+(foreach  sound  (begin (set-and-coerce-property-and-check! (get-component sndMain)
+ 'Sound 'Source (lexical-value sound)
+ 'text)
+
+)
+  (get-var SoundList)
+)
+
+(foreach  music  (begin (set-and-coerce-property-and-check! (get-component plyMain)
+ 'Player 'Source (lexical-value music)
+ 'text)
+
+)
+  (get-var MusicList)
+)
+
+ )
+(def (ButtonClickCheck Clicked )
+(set-and-coerce-property! 'sndMain 'Source "click.mp3" 'text)
+
+(call-component-method 'sndMain 'Play (*list-for-runtime*)
+ '())
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnAbout)
+)
+ '( any any)
+ "=")
+ (begin (call-component-method 'notMain 'ShowMessageDialog (*list-for-runtime* (call-yail-primitive string-append (*list-for-runtime* "This is version 1.0 of MyGameStarterApp. \nCopyright 2011 tAIR\nLicensed under" "\nthe GNU GPL v3" "\n" "\nCreated by Tony Barnes\nwith the assistance of\nRoger \"BDA\" Belk")
+ '( text text text text)
+ "make text")
+ "About MyAPP" "OK")
+ '( text text text)
+)
+
+)
+ (begin ((get-var CloseScreens))
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnHelp)
+)
+ '( any any)
+ "=")
+ (begin (set-and-coerce-property-and-check! (get-component varHelp)
+ 'VerticalArrangement 'Visible #t 'boolean)
+
+)
+)
+
+(if (or-delayed   (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnHelpClose)
+)
+ '( any any)
+ "=")
+ (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnSettingsClose)
+)
+ '( any any)
+ "=")
+)
+ (begin (set-and-coerce-property-and-check! (get-component varScreenHome)
+ 'VerticalArrangement 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'imgSliderButton 'X 0 'number)
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnHome)
+)
+ '( any any)
+ "=")
+ (begin (set-and-coerce-property-and-check! (get-component varScreenHome)
+ 'VerticalArrangement 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'imgSliderButton 'X 0 'number)
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnScreen2)
+)
+ '( any any)
+ "=")
+ (begin (set-and-coerce-property-and-check! (get-component varScreen2)
+ 'VerticalArrangement 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'imgSliderButton 'X (call-yail-primitive - (*list-for-runtime* (call-yail-primitive yail-divide (*list-for-runtime* (get-property 'Screen1 'Width)
+ 2)
+ '( number number)
+ "\/")
+ 15)
+ '( number number)
+ "\u2212")
+ 'number)
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnScreen3)
+)
+ '( any any)
+ "=")
+ (begin (set-and-coerce-property-and-check! (get-component varScreen3)
+ 'VerticalArrangement 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'imgSliderButton 'X (call-yail-primitive - (*list-for-runtime* (get-property 'Screen1 'Width)
+ 15)
+ '( number number)
+ "\u2212")
+ 'number)
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnSettings)
+)
+ '( any any)
+ "=")
+ (begin (set-and-coerce-property-and-check! (get-component varSettings)
+ 'VerticalArrangement 'Visible #t 'boolean)
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnHighScores)
+)
+ '( any any)
+ "=")
+ (begin (set-var! TEMP_PLAYER  (call-component-method 'tdbMain 'GetValue (*list-for-runtime* "PLAYER")
+ '( text)
+)
+)
+
+(if (call-yail-primitive yail-not (*list-for-runtime* (call-yail-primitive yail-equal? (*list-for-runtime* (get-var TEMP_PLAYER)
+ "")
+ '( any any)
+ "=")
+)
+ '( boolean)
+ "not")
+ (begin (set-var! PLAYERLIST  (call-component-method 'tdbMain 'GetValue (*list-for-runtime* "PLAYER")
+ '( text)
+)
+)
+
+(set-var! SCORELIST  (call-component-method 'tdbMain 'GetValue (*list-for-runtime* "SCORE")
+ '( text)
+)
+)
+
+)
+)
+
+(set-var! I_COUNTER  0)
+
+(set-and-coerce-property-and-check! (get-component varHighScores)
+ 'VerticalArrangement 'Visible #t 'boolean)
+
+((get-var SortGlobalHS))
+
+((get-var PRINTOUT))
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnFeedBack)
+)
+ '( any any)
+ "=")
+ (begin (set-and-coerce-property! 'varHelp 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'actMain 'DataUri "mailto:Barnes.tony@gmail.com?subject=Feedback from Enhanced Game Starter template&body=Game Template Feedback." 'text)
+
+(call-component-method 'actMain 'StartActivity (*list-for-runtime*)
+ '())
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnCloseWebsite)
+)
+ '( any any)
+ "=")
+ (begin (set-and-coerce-property! 'wbvMain 'Visible #f 'boolean)
+
+(set-and-coerce-property! 'btnCloseWebsite 'Visible #f 'boolean)
+
+(set-and-coerce-property! 'varHelp 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'btnHelpClose 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'vartAIRHelpButtons 'Visible #t 'boolean)
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnTairCode)
+)
+ '( any any)
+ "=")
+ (begin (call-component-method 'wbvMain 'GoToUrl (*list-for-runtime* "http://code.google.com/p/the-ai-repository")
+ '( text)
+)
+
+((get-var WebButtonClick))
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnTairGroup)
+)
+ '( any any)
+ "=")
+ (begin (call-component-method 'wbvMain 'GoToUrl (*list-for-runtime* "http://groups.google.com/group/theairepository")
+ '( text)
+)
+
+((get-var WebButtonClick))
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnOtherApps)
+)
+ '( any any)
+ "=")
+ (begin (call-component-method 'wbvMain 'GoToUrl (*list-for-runtime* "http://market.android.com/search?q=pub:tAIR")
+ '( text)
+)
+
+((get-var WebButtonClick))
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnTair)
+)
+ '( any any)
+ "=")
+ (begin (call-component-method 'wbvMain 'GoToUrl (*list-for-runtime* "http://www.tair.info")
+ '( text)
+)
+
+((get-var WebButtonClick))
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value Clicked)
+ (get-component btnSaveUserName)
+)
+ '( any any)
+ "=")
+ (begin (set-and-coerce-property-and-check! (get-component varScreenHome)
+ 'VerticalArrangement 'Visible #t 'boolean)
+
+(call-component-method 'tdbMain 'StoreValue (*list-for-runtime* "PLAYER_NAME" (get-property 'txbUserName 'Text)
+)
+ '( text any)
+)
+
+(call-component-method 'notMain 'ShowAlert (*list-for-runtime* "Username Saved!")
+ '( text)
+)
+
+(call-component-type-method (get-component txbUserName)
+ 'TextBox 'HideKeyboard (*list-for-runtime*)
+ '( component)
+)
+
+)
+)
+
+ )
+(def ButtonName (call-yail-primitive make-yail-list (*list-for-runtime* "About" "Help" "Home" "Screen Two" "Screen Three" "Settings" "High Scores")
+ '( any any any any any any any)
+ "make a list")
+)
+
+(def (CloseScreens)
+(foreach  vsa  (begin (set-and-coerce-property-and-check! (lexical-value vsa)
+ 'VerticalArrangement 'Visible #f 'boolean)
+
+)
+  (get-var vars)
+)
+
+ )
+(def (NewScore NewPlayer  NewScore )
+(call-yail-primitive yail-list-add-to-list! (*list-for-runtime* (get-var PLAYERLIST)
+ (lexical-value NewPlayer)
+)
+ '( list any)
+ "add items to list")
+
+(call-yail-primitive yail-list-add-to-list! (*list-for-runtime* (get-var SCORELIST)
+ (lexical-value NewScore)
+)
+ '( list any)
+ "add items to list")
+
+((get-var SortGlobalHS))
+
+(if (call-yail-primitive > (*list-for-runtime* (call-yail-primitive yail-list-length (*list-for-runtime* (get-var PLAYERLIST)
+)
+ '( list)
+ "length of list")
+ 10)
+ '( number number)
+ ">")
+ (begin (call-yail-primitive yail-list-remove-item! (*list-for-runtime* (get-var PLAYERLIST)
+ (call-yail-primitive yail-list-length (*list-for-runtime* (get-var PLAYERLIST)
+)
+ '( list)
+ "length of list")
+)
+ '( list number)
+ "remove list item")
+
+(call-yail-primitive yail-list-remove-item! (*list-for-runtime* (get-var SCORELIST)
+ (call-yail-primitive yail-list-length (*list-for-runtime* (get-var SCORELIST)
+)
+ '( list)
+ "length of list")
+)
+ '( list number)
+ "remove list item")
+
+)
+)
+
+ )
+(def EULA "")
+
+(def vars (call-yail-primitive make-yail-list (*list-for-runtime*)
+ '()
+ "make a list")
+)
+
+(def MusicList (call-yail-primitive make-yail-list (*list-for-runtime*)
+ '()
+ "make a list")
+)
+
+(def SoundList (call-yail-primitive make-yail-list (*list-for-runtime*)
+ '()
+ "make a list")
+)
+
+(def ButtonList (call-yail-primitive make-yail-list (*list-for-runtime*)
+ '()
+ "make a list")
+)
+
+(def I_COUNTER 0)
+
+(def PLAYERLIST (call-yail-primitive make-yail-list (*list-for-runtime*)
+ '()
+ "make a list")
+)
+
+(def SCORELIST (call-yail-primitive make-yail-list (*list-for-runtime*)
+ '()
+ "make a list")
+)
+
+(def PlayerOut "")
+
+(def ScoreOut "")
+
+(def ITEM_ON 1)
+
+(def TEMP_PLAYER "")
+
+(def TimesThruList -1)
+
+(def GameScore 0)
+
+(def (DoSwap)
+(set-var! TEMP_SCORE  (call-yail-primitive yail-list-get-item (*list-for-runtime* (get-var SCORELIST)
+ (get-var ITEM_ON)
+)
+ '( list number)
+ "select list item")
+)
+
+(call-yail-primitive yail-list-set-item! (*list-for-runtime* (get-var SCORELIST)
+ (get-var ITEM_ON)
+ (call-yail-primitive yail-list-get-item (*list-for-runtime* (get-var SCORELIST)
+ (call-yail-primitive + (*list-for-runtime* (get-var ITEM_ON)
+ 1)
+ '( number number)
+ "+")
+)
+ '( list number)
+ "select list item")
+)
+ '( list number any)
+ "replace list item")
+
+(call-yail-primitive yail-list-set-item! (*list-for-runtime* (get-var SCORELIST)
+ (call-yail-primitive + (*list-for-runtime* (get-var ITEM_ON)
+ 1)
+ '( number number)
+ "+")
+ (get-var TEMP_SCORE)
+)
+ '( list number any)
+ "replace list item")
+
+(set-var! TEMP_PLAYER  (call-yail-primitive yail-list-get-item (*list-for-runtime* (get-var PLAYERLIST)
+ (get-var ITEM_ON)
+)
+ '( list number)
+ "select list item")
+)
+
+(call-yail-primitive yail-list-set-item! (*list-for-runtime* (get-var PLAYERLIST)
+ (get-var ITEM_ON)
+ (call-yail-primitive yail-list-get-item (*list-for-runtime* (get-var PLAYERLIST)
+ (call-yail-primitive + (*list-for-runtime* (get-var ITEM_ON)
+ 1)
+ '( number number)
+ "+")
+)
+ '( list number)
+ "select list item")
+)
+ '( list number any)
+ "replace list item")
+
+(call-yail-primitive yail-list-set-item! (*list-for-runtime* (get-var PLAYERLIST)
+ (call-yail-primitive + (*list-for-runtime* (get-var ITEM_ON)
+ 1)
+ '( number number)
+ "+")
+ (get-var TEMP_PLAYER)
+)
+ '( list number any)
+ "replace list item")
+
+ )
+(def TEMP_SCORE "")
+
+(def TEMP_NAME "")
+
+(def Swap #f)
+
+;;; Screen1
+(do-after-form-creation (set-and-coerce-property! 'Screen1 'BackgroundColor #xFFCCCCCC 'number)
+(set-and-coerce-property! 'Screen1 'Icon "tAIR-code-52px.png" 'text)
+(set-and-coerce-property! 'Screen1 'Title "Enhanced Game Starter Template" 'text)
+)
+(define-event Screen1 Initialize()
+ (set-this-form)
+ (get-var *the-null-value*)
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (call-component-method 'tdbMain 'GetValue (*list-for-runtime* "PLAYER_NAME")
+ '( text)
+)
+ "")
+ '( any any)
+ "=")
+ (begin (set-and-coerce-property! 'txbUserName 'Text "" 'text)
+
+)
+ (begin (set-and-coerce-property! 'txbUserName 'Text (call-component-method 'tdbMain 'GetValue (*list-for-runtime* "PLAYER_NAME")
+ '( text)
+)
+ 'text)
+
+)
+)
+
+(call-component-method 'twdHighScore 'GetValue (*list-for-runtime* (call-yail-primitive string-append (*list-for-runtime* (get-var APPNAME)
+ "PLAYERS")
+ '( text text)
+ "join")
+)
+ '( text)
+)
+
+(call-component-method 'twdHighScore 'GetValue (*list-for-runtime* (call-yail-primitive string-append (*list-for-runtime* (get-var APPNAME)
+ "SCORES")
+ '( text text)
+ "join")
+)
+ '( text)
+)
+
+(set-var! SoundList  (call-yail-primitive make-yail-list (*list-for-runtime* "click.mp3")
+ '( any)
+ "make a list")
+)
+
+(set-var! MusicList  (call-yail-primitive make-yail-list (*list-for-runtime* "EATENGIRL.WAV")
+ '( any)
+ "make a list")
+)
+
+((get-var initsounds))
+
+(set-and-coerce-property! 'sndMain 'Source "click.mp3" 'text)
+
+(call-component-method 'sndMain 'Play (*list-for-runtime*)
+ '())
+
+(set-and-coerce-property! 'plyMain 'Source "EATENGIRL.WAV" 'text)
+
+(call-component-method 'plyMain 'Start (*list-for-runtime*)
+ '())
+
+(if (call-yail-primitive yail-not-equal? (*list-for-runtime* (call-component-method 'tdbMain 'GetValue (*list-for-runtime* "screenpicker")
+ '( text)
+)
+ "")
+ '( any any)
+ "not =")
+ (begin (set-and-coerce-property! 'ckbScreenPicker 'Checked (call-component-method 'tdbMain 'GetValue (*list-for-runtime* "screenpicker")
+ '( text)
+)
+ 'boolean)
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (get-property 'ckbScreenPicker 'Checked)
+ #t)
+ '( any any)
+ "=")
+ (begin (set-and-coerce-property! 'lprScreenChanger 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'harNavRow1 'Visible #f 'boolean)
+
+(set-and-coerce-property! 'harNavRow2 'Visible #f 'boolean)
+
+)
+ (begin (set-and-coerce-property! 'lprScreenChanger 'Visible #f 'boolean)
+
+(set-and-coerce-property! 'harNavRow1 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'harNavRow2 'Visible #t 'boolean)
+
+)
+)
+
+(set-var! EULA  (call-component-method 'tdbMain 'GetValue (*list-for-runtime* "EULA")
+ '( text)
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (get-var EULA)
+ "")
+ '( any any)
+ "=")
+ (begin (call-component-method 'notMain 'ShowChooseDialog (*list-for-runtime* "Your EULA text goes here. You must accept the EULA to continue.\n Seperate Lines by using switch n\n" "EULA" "Accept" "Quit")
+ '( text text text text)
+)
+
+)
+)
+
+(set-var! ButtonList  (call-yail-primitive make-yail-list (*list-for-runtime* (get-component btnAbout)
+ (get-component btnHelp)
+ (get-component btnHome)
+ (get-component btnScreen2)
+ (get-component btnScreen3)
+ (get-component btnSettings)
+ (get-component btnHighScores)
+)
+ '( any any any any any any any)
+ "make a list")
+)
+
+(set-var! vars  (call-yail-primitive make-yail-list (*list-for-runtime* (get-component varHelp)
+ (get-component varScreenHome)
+ (get-component varScreen2)
+ (get-component varScreen3)
+ (get-component varSettings)
+ (get-component varHighScores)
+ (get-component varSplash)
+)
+ '( any any any any any any any)
+ "make a list")
+)
+
+((get-var DrawCanvas))
+
+)
+;;; varNav
+(add-component Screen1 VerticalArrangement varNav (set-and-coerce-property! 'varNav 'Width -2 'number)
+)
+;;; lprScreenChanger
+(add-component varNav ListPicker lprScreenChanger (set-and-coerce-property! 'lprScreenChanger 'FontBold #t 'boolean)
+(set-and-coerce-property! 'lprScreenChanger 'Image "gold.png" 'text)
+(set-and-coerce-property! 'lprScreenChanger 'Text "Screen" 'text)
+(set-and-coerce-property! 'lprScreenChanger 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'lprScreenChanger 'Visible #f 'boolean)
+(set-and-coerce-property! 'lprScreenChanger 'Width -2 'number)
+)
+(define-event lprScreenChanger BeforePicking()
+ (set-this-form)
+ (set-and-coerce-property! 'lprScreenChanger 'Elements (get-var ButtonName)
+ 'list)
+
+)
+(define-event lprScreenChanger AfterPicking()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (call-yail-primitive yail-list-get-item (*list-for-runtime* (get-var ButtonList)
+ (get-property 'lprScreenChanger 'SelectionIndex)
+)
+ '( list number)
+ "select list item")
+)
+
+)
+;;; harNavRow1
+(add-component varNav HorizontalArrangement harNavRow1 (set-and-coerce-property! 'harNavRow1 'Width -2 'number)
+)
+;;; btnHome
+(add-component harNavRow1 Button btnHome (set-and-coerce-property! 'btnHome 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnHome 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnHome 'Text "Home" 'text)
+(set-and-coerce-property! 'btnHome 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'btnHome 'Width -2 'number)
+)
+(define-event btnHome Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnHome)
+)
+
+)
+;;; btnScreen2
+(add-component harNavRow1 Button btnScreen2 (set-and-coerce-property! 'btnScreen2 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnScreen2 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnScreen2 'Text "Screen 2" 'text)
+(set-and-coerce-property! 'btnScreen2 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'btnScreen2 'Width -2 'number)
+)
+(define-event btnScreen2 Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnScreen2)
+)
+
+)
+;;; btnHighScores
+(add-component harNavRow1 Button btnHighScores (set-and-coerce-property! 'btnHighScores 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnHighScores 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnHighScores 'Text "High Scores" 'text)
+(set-and-coerce-property! 'btnHighScores 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'btnHighScores 'Width -2 'number)
+)
+(define-event btnHighScores Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnHighScores)
+)
+
+)
+;;; btnScreen3
+(add-component harNavRow1 Button btnScreen3 (set-and-coerce-property! 'btnScreen3 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnScreen3 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnScreen3 'Text "Screen 3" 'text)
+(set-and-coerce-property! 'btnScreen3 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'btnScreen3 'Visible #f 'boolean)
+(set-and-coerce-property! 'btnScreen3 'Width -2 'number)
+)
+(define-event btnScreen3 Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnScreen3)
+)
+
+)
+;;; harNavRow2
+(add-component varNav HorizontalArrangement harNavRow2 (set-and-coerce-property! 'harNavRow2 'Width -2 'number)
+)
+;;; btnAbout
+(add-component harNavRow2 Button btnAbout (set-and-coerce-property! 'btnAbout 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnAbout 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnAbout 'Text "About" 'text)
+(set-and-coerce-property! 'btnAbout 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'btnAbout 'Width -2 'number)
+)
+(define-event btnAbout Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnAbout)
+)
+
+)
+;;; btnHelp
+(add-component harNavRow2 Button btnHelp (set-and-coerce-property! 'btnHelp 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnHelp 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnHelp 'Text "Help" 'text)
+(set-and-coerce-property! 'btnHelp 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'btnHelp 'Width -2 'number)
+)
+(define-event btnHelp Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnHelp)
+)
+
+)
+;;; btnSettings
+(add-component harNavRow2 Button btnSettings (set-and-coerce-property! 'btnSettings 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnSettings 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnSettings 'Text "Settings" 'text)
+(set-and-coerce-property! 'btnSettings 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'btnSettings 'Width -2 'number)
+)
+(define-event btnSettings Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnSettings)
+)
+
+)
+;;; varSplash
+(add-component Screen1 VerticalArrangement varSplash (set-and-coerce-property! 'varSplash 'Width -2 'number)
+)
+;;; Label1
+(add-component varSplash Label Label1 (set-and-coerce-property! 'Label1 'FontSize 20.0 'number)
+(set-and-coerce-property! 'Label1 'Height -2 'number)
+(set-and-coerce-property! 'Label1 'Width -2 'number)
+)
+;;; harSplashImages
+(add-component varSplash HorizontalArrangement harSplashImages (set-and-coerce-property! 'harSplashImages 'Width -2 'number)
+)
+;;; lblSplashImageSpacerLeft
+(add-component harSplashImages Label lblSplashImageSpacerLeft (set-and-coerce-property! 'lblSplashImageSpacerLeft 'Width -2 'number)
+)
+;;; imgSplash1
+(add-component harSplashImages Image imgSplash1 (set-and-coerce-property! 'imgSplash1 'Picture "tAIR-logo-52px.png" 'text)
+)
+;;; ImgSplash2
+(add-component harSplashImages Image ImgSplash2 (set-and-coerce-property! 'ImgSplash2 'Picture "tAIR-group-52px.png" 'text)
+)
+;;; imgSplash3
+(add-component harSplashImages Image imgSplash3 (set-and-coerce-property! 'imgSplash3 'Picture "tAIR-code-52px.png" 'text)
+)
+;;; lblSplashImageSpacerRight
+(add-component harSplashImages Label lblSplashImageSpacerRight (set-and-coerce-property! 'lblSplashImageSpacerRight 'Width -2 'number)
+)
+;;; varPieces
+(add-component varSplash VerticalArrangement varPieces (set-and-coerce-property! 'varPieces 'Width -2 'number)
+)
+;;; lblSplashPieces
+(add-component varPieces Label lblSplashPieces (set-and-coerce-property! 'lblSplashPieces 'FontSize 18.0 'number)
+(set-and-coerce-property! 'lblSplashPieces 'Text "Putting the pieces together\n" 'text)
+(set-and-coerce-property! 'lblSplashPieces 'TextAlignment 1 'number)
+(set-and-coerce-property! 'lblSplashPieces 'Width -2 'number)
+)
+;;; lblSplashText
+(add-component varSplash Label lblSplashText (set-and-coerce-property! 'lblSplashText 'FontSize 24.0 'number)
+(set-and-coerce-property! 'lblSplashText 'Height -2 'number)
+(set-and-coerce-property! 'lblSplashText 'Text "tAIR Game Starter\nTemplate V1.0\nCreated By\nTony Barnes\nand\nRoger \"BDA\" Belk" 'text)
+(set-and-coerce-property! 'lblSplashText 'TextAlignment 1 'number)
+(set-and-coerce-property! 'lblSplashText 'Width -2 'number)
+)
+;;; varScreenHome
+(add-component Screen1 VerticalArrangement varScreenHome (set-and-coerce-property! 'varScreenHome 'Height -2 'number)
+(set-and-coerce-property! 'varScreenHome 'Visible #f 'boolean)
+(set-and-coerce-property! 'varScreenHome 'Width -2 'number)
+)
+;;; harUserInformation
+(add-component varScreenHome HorizontalArrangement harUserInformation (set-and-coerce-property! 'harUserInformation 'Width -2 'number)
+)
+;;; txbUserName
+(add-component harUserInformation TextBox txbUserName (set-and-coerce-property! 'txbUserName 'Hint "Username" 'text)
+(set-and-coerce-property! 'txbUserName 'Width -2 'number)
+)
+;;; btnSaveUserName
+(add-component harUserInformation Button btnSaveUserName (set-and-coerce-property! 'btnSaveUserName 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnSaveUserName 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnSaveUserName 'Text "Save" 'text)
+(set-and-coerce-property! 'btnSaveUserName 'TextColor #xFF00FF00 'number)
+)
+(define-event btnSaveUserName Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnSaveUserName)
+)
+
+)
+;;; harHomeBody
+(add-component varScreenHome HorizontalArrangement harHomeBody (set-and-coerce-property! 'harHomeBody 'Height -2 'number)
+(set-and-coerce-property! 'harHomeBody 'Width -2 'number)
+)
+;;; lblScreenHomeBody
+(add-component harHomeBody Label lblScreenHomeBody (set-and-coerce-property! 'lblScreenHomeBody 'Text "Put all of the items needed for screen one in this Screen Arrangement" 'text)
+(set-and-coerce-property! 'lblScreenHomeBody 'Width -2 'number)
+)
+;;; harHomeFooter
+(add-component varScreenHome HorizontalArrangement harHomeFooter (set-and-coerce-property! 'harHomeFooter 'Height -2 'number)
+(set-and-coerce-property! 'harHomeFooter 'Width -2 'number)
+)
+;;; lblScreenHomeFooter
+(add-component harHomeFooter Label lblScreenHomeFooter (set-and-coerce-property! 'lblScreenHomeFooter 'BackgroundColor #xFF000000 'number)
+(set-and-coerce-property! 'lblScreenHomeFooter 'FontBold #t 'boolean)
+(set-and-coerce-property! 'lblScreenHomeFooter 'Text "This is the Home Screen" 'text)
+(set-and-coerce-property! 'lblScreenHomeFooter 'TextAlignment 1 'number)
+(set-and-coerce-property! 'lblScreenHomeFooter 'TextColor #xFFCCCCCC 'number)
+(set-and-coerce-property! 'lblScreenHomeFooter 'Width -2 'number)
+)
+;;; varScreen2
+(add-component Screen1 VerticalArrangement varScreen2 (set-and-coerce-property! 'varScreen2 'Height -2 'number)
+(set-and-coerce-property! 'varScreen2 'Visible #f 'boolean)
+(set-and-coerce-property! 'varScreen2 'Width -2 'number)
+)
+;;; harScreen2Body
+(add-component varScreen2 HorizontalArrangement harScreen2Body (set-and-coerce-property! 'harScreen2Body 'Height -2 'number)
+(set-and-coerce-property! 'harScreen2Body 'Width -2 'number)
+)
+;;; lblScreen2Body
+(add-component harScreen2Body Label lblScreen2Body (set-and-coerce-property! 'lblScreen2Body 'Text "Put all of the items needed for screen two in this Screen Arrangement" 'text)
+(set-and-coerce-property! 'lblScreen2Body 'Width -2 'number)
+)
+;;; harScreen2Footer
+(add-component varScreen2 HorizontalArrangement harScreen2Footer (set-and-coerce-property! 'harScreen2Footer 'Height -2 'number)
+(set-and-coerce-property! 'harScreen2Footer 'Width -2 'number)
+)
+;;; lblScreen2Footer
+(add-component harScreen2Footer Label lblScreen2Footer (set-and-coerce-property! 'lblScreen2Footer 'BackgroundColor #xFF000000 'number)
+(set-and-coerce-property! 'lblScreen2Footer 'Text "This is screen 2" 'text)
+(set-and-coerce-property! 'lblScreen2Footer 'TextAlignment 1 'number)
+(set-and-coerce-property! 'lblScreen2Footer 'TextColor #xFFFFFFFF 'number)
+(set-and-coerce-property! 'lblScreen2Footer 'Width -2 'number)
+)
+;;; varScreen3
+(add-component Screen1 VerticalArrangement varScreen3 (set-and-coerce-property! 'varScreen3 'Height -2 'number)
+(set-and-coerce-property! 'varScreen3 'Visible #f 'boolean)
+(set-and-coerce-property! 'varScreen3 'Width -2 'number)
+)
+;;; harScreen3Body
+(add-component varScreen3 HorizontalArrangement harScreen3Body (set-and-coerce-property! 'harScreen3Body 'Height -2 'number)
+(set-and-coerce-property! 'harScreen3Body 'Width -2 'number)
+)
+;;; lblScreen3Body
+(add-component harScreen3Body Label lblScreen3Body (set-and-coerce-property! 'lblScreen3Body 'Text "Put all of the items needed for screen three in this Screen Arrangement" 'text)
+(set-and-coerce-property! 'lblScreen3Body 'Width -2 'number)
+)
+;;; harScreen3Footer
+(add-component varScreen3 HorizontalArrangement harScreen3Footer (set-and-coerce-property! 'harScreen3Footer 'Height -2 'number)
+(set-and-coerce-property! 'harScreen3Footer 'Width -2 'number)
+)
+;;; lblScreen3Footer
+(add-component harScreen3Footer Label lblScreen3Footer (set-and-coerce-property! 'lblScreen3Footer 'BackgroundColor #xFF000000 'number)
+(set-and-coerce-property! 'lblScreen3Footer 'Text "This is screen 3" 'text)
+(set-and-coerce-property! 'lblScreen3Footer 'TextAlignment 1 'number)
+(set-and-coerce-property! 'lblScreen3Footer 'TextColor #xFFCCCCCC 'number)
+(set-and-coerce-property! 'lblScreen3Footer 'Width -2 'number)
+)
+;;; varHelp
+(add-component Screen1 VerticalArrangement varHelp (set-and-coerce-property! 'varHelp 'Visible #f 'boolean)
+(set-and-coerce-property! 'varHelp 'Width -2 'number)
+)
+;;; lblHelpTitle
+(add-component varHelp Label lblHelpTitle (set-and-coerce-property! 'lblHelpTitle 'FontSize 20.0 'number)
+(set-and-coerce-property! 'lblHelpTitle 'Text "Help" 'text)
+(set-and-coerce-property! 'lblHelpTitle 'TextAlignment 1 'number)
+(set-and-coerce-property! 'lblHelpTitle 'Width -2 'number)
+)
+;;; harHelpText
+(add-component varHelp HorizontalArrangement harHelpText (set-and-coerce-property! 'harHelpText 'Width -2 'number)
+)
+;;; lblHelpText
+(add-component harHelpText Label lblHelpText (set-and-coerce-property! 'lblHelpText 'FontSize 18.0 'number)
+(set-and-coerce-property! 'lblHelpText 'Text "\nThis is your help screen! \nYour help text goes here!\n\n\nCustomize this page with whatever help information you want.\nI added buttons to the three tAIR websites and a feedback button.\n" 'text)
+(set-and-coerce-property! 'lblHelpText 'Width -2 'number)
+)
+;;; varTairContactInfo
+(add-component varHelp VerticalArrangement varTairContactInfo (set-and-coerce-property! 'varTairContactInfo 'Width -2 'number)
+)
+;;; vartAIRHelpButtons
+(add-component varTairContactInfo VerticalArrangement vartAIRHelpButtons (set-and-coerce-property! 'vartAIRHelpButtons 'Width -2 'number)
+)
+;;; harTairButtons
+(add-component vartAIRHelpButtons HorizontalArrangement harTairButtons (set-and-coerce-property! 'harTairButtons 'Width -2 'number)
+)
+;;; lblTairSpacerLeft
+(add-component harTairButtons Label lblTairSpacerLeft (set-and-coerce-property! 'lblTairSpacerLeft 'Width -2 'number)
+)
+;;; btnTair
+(add-component harTairButtons Button btnTair (set-and-coerce-property! 'btnTair 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnTair 'Image "tAIR-logo-52px.png" 'text)
+)
+(define-event btnTair Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnTair)
+)
+
+)
+;;; btnTairGroup
+(add-component harTairButtons Button btnTairGroup (set-and-coerce-property! 'btnTairGroup 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnTairGroup 'Image "tAIR-group-52px.png" 'text)
+)
+(define-event btnTairGroup Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnTairGroup)
+)
+
+)
+;;; btnTairCode
+(add-component harTairButtons Button btnTairCode (set-and-coerce-property! 'btnTairCode 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnTairCode 'Image "tAIR-code-52px.png" 'text)
+)
+(define-event btnTairCode Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnTairCode)
+)
+
+)
+;;; lblTairSpacerRight
+(add-component harTairButtons Label lblTairSpacerRight (set-and-coerce-property! 'lblTairSpacerRight 'Width -2 'number)
+)
+;;; lblPieces
+(add-component vartAIRHelpButtons Label lblPieces (set-and-coerce-property! 'lblPieces 'FontBold #t 'boolean)
+(set-and-coerce-property! 'lblPieces 'Text "Putting the Pieces Together" 'text)
+(set-and-coerce-property! 'lblPieces 'TextAlignment 1 'number)
+(set-and-coerce-property! 'lblPieces 'Width -2 'number)
+)
+;;; harOtherButtons
+(add-component vartAIRHelpButtons HorizontalArrangement harOtherButtons (set-and-coerce-property! 'harOtherButtons 'Width -2 'number)
+)
+;;; btnOtherApps
+(add-component harOtherButtons Button btnOtherApps (set-and-coerce-property! 'btnOtherApps 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnOtherApps 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnOtherApps 'Text "Other Apps" 'text)
+(set-and-coerce-property! 'btnOtherApps 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'btnOtherApps 'Width -2 'number)
+)
+(define-event btnOtherApps Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnOtherApps)
+)
+
+)
+;;; btnFeedBack
+(add-component harOtherButtons Button btnFeedBack (set-and-coerce-property! 'btnFeedBack 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnFeedBack 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnFeedBack 'Text "Feedback" 'text)
+(set-and-coerce-property! 'btnFeedBack 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'btnFeedBack 'Width -2 'number)
+)
+(define-event btnFeedBack Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnFeedBack)
+)
+
+)
+;;; btnCloseWebsite
+(add-component varTairContactInfo Button btnCloseWebsite (set-and-coerce-property! 'btnCloseWebsite 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnCloseWebsite 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnCloseWebsite 'Text "Close Website" 'text)
+(set-and-coerce-property! 'btnCloseWebsite 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'btnCloseWebsite 'Visible #f 'boolean)
+(set-and-coerce-property! 'btnCloseWebsite 'Width -2 'number)
+)
+(define-event btnCloseWebsite Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnCloseWebsite)
+)
+
+)
+;;; lblLoading
+(add-component varTairContactInfo Label lblLoading (set-and-coerce-property! 'lblLoading 'FontBold #t 'boolean)
+(set-and-coerce-property! 'lblLoading 'FontSize 20.0 'number)
+(set-and-coerce-property! 'lblLoading 'Text "- - - - -   L O A D I N G   - - - - -" 'text)
+(set-and-coerce-property! 'lblLoading 'TextAlignment 1 'number)
+(set-and-coerce-property! 'lblLoading 'TextColor #xFFFF0000 'number)
+(set-and-coerce-property! 'lblLoading 'Width -2 'number)
+)
+;;; wbvMain
+(add-component varTairContactInfo WebViewer wbvMain (set-and-coerce-property! 'wbvMain 'Visible #f 'boolean)
+(set-and-coerce-property! 'wbvMain 'Width -2 'number)
+)
+;;; btnHelpClose
+(add-component varTairContactInfo Button btnHelpClose (set-and-coerce-property! 'btnHelpClose 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnHelpClose 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnHelpClose 'Text "Close" 'text)
+(set-and-coerce-property! 'btnHelpClose 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'btnHelpClose 'Width -2 'number)
+)
+(define-event btnHelpClose Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnHelpClose)
+)
+
+)
+;;; varSettings
+(add-component Screen1 VerticalArrangement varSettings (set-and-coerce-property! 'varSettings 'Visible #f 'boolean)
+(set-and-coerce-property! 'varSettings 'Width -2 'number)
+)
+;;; ckbScreenPicker
+(add-component varSettings CheckBox ckbScreenPicker (set-and-coerce-property! 'ckbScreenPicker 'Text "Enable Screen Picker" 'text)
+(set-and-coerce-property! 'ckbScreenPicker 'Width -2 'number)
+)
+(define-event ckbScreenPicker Changed()
+ (set-this-form)
+ (if (call-yail-primitive yail-equal? (*list-for-runtime* (get-property 'ckbScreenPicker 'Checked)
+ #t)
+ '( any any)
+ "=")
+ (begin (set-and-coerce-property! 'harNavRow1 'Visible #f 'boolean)
+
+(set-and-coerce-property! 'harNavRow2 'Visible #f 'boolean)
+
+(set-and-coerce-property! 'lprScreenChanger 'Visible #t 'boolean)
+
+)
+ (begin (set-and-coerce-property! 'harNavRow1 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'harNavRow2 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'lprScreenChanger 'Visible #f 'boolean)
+
+)
+)
+
+(call-component-method 'tdbMain 'StoreValue (*list-for-runtime* "screenpicker" (get-property 'ckbScreenPicker 'Checked)
+)
+ '( text any)
+)
+
+)
+;;; ckbSlider
+(add-component varSettings CheckBox ckbSlider (set-and-coerce-property! 'ckbSlider 'Text "Enable Slider" 'text)
+)
+(define-event ckbSlider Changed()
+ (set-this-form)
+ (if (call-yail-primitive yail-equal? (*list-for-runtime* (get-property 'ckbSlider 'Checked)
+ #t)
+ '( any any)
+ "=")
+ (begin (set-and-coerce-property! 'cnvSlider 'Visible #t 'boolean)
+
+((get-var DrawCanvas))
+
+)
+ (begin (set-and-coerce-property! 'cnvSlider 'Visible #f 'boolean)
+
+)
+)
+
+(call-component-method 'tdbMain 'StoreValue (*list-for-runtime* "canvas" (get-property 'ckbSlider 'Checked)
+)
+ '( text any)
+)
+
+)
+;;; btnSettingsClose
+(add-component varSettings Button btnSettingsClose (set-and-coerce-property! 'btnSettingsClose 'FontBold #t 'boolean)
+(set-and-coerce-property! 'btnSettingsClose 'Image "gold.png" 'text)
+(set-and-coerce-property! 'btnSettingsClose 'Text "Close" 'text)
+(set-and-coerce-property! 'btnSettingsClose 'TextColor #xFF00FF00 'number)
+(set-and-coerce-property! 'btnSettingsClose 'Width -2 'number)
+)
+(define-event btnSettingsClose Click()
+ (set-this-form)
+ ((get-var ButtonClickCheck) (get-component btnSettingsClose)
+)
+
+)
+;;; harSpacer
+(add-component Screen1 HorizontalArrangement harSpacer (set-and-coerce-property! 'harSpacer 'Width -2 'number)
+)
+;;; lblSpacer
+(add-component harSpacer Label lblSpacer (set-and-coerce-property! 'lblSpacer 'Width -2 'number)
+)
+;;; varHighScores
+(add-component Screen1 VerticalArrangement varHighScores (set-and-coerce-property! 'varHighScores 'Visible #f 'boolean)
+(set-and-coerce-property! 'varHighScores 'Width -2 'number)
+)
+;;; lblHighScores
+(add-component varHighScores Label lblHighScores (set-and-coerce-property! 'lblHighScores 'FontSize 30.0 'number)
+(set-and-coerce-property! 'lblHighScores 'Text "High Scores" 'text)
+(set-and-coerce-property! 'lblHighScores 'TextAlignment 1 'number)
+(set-and-coerce-property! 'lblHighScores 'Width -2 'number)
+)
+;;; harScoreColumnHeaders
+(add-component varHighScores HorizontalArrangement harScoreColumnHeaders (set-and-coerce-property! 'harScoreColumnHeaders 'Width -2 'number)
+)
+;;; lblNamesTitle
+(add-component harScoreColumnHeaders Label lblNamesTitle (set-and-coerce-property! 'lblNamesTitle 'FontSize 20.0 'number)
+(set-and-coerce-property! 'lblNamesTitle 'Text "Names" 'text)
+(set-and-coerce-property! 'lblNamesTitle 'TextAlignment 2 'number)
+(set-and-coerce-property! 'lblNamesTitle 'Width -2 'number)
+)
+;;; lblScoresTitleSpacer
+(add-component harScoreColumnHeaders Label lblScoresTitleSpacer (set-and-coerce-property! 'lblScoresTitleSpacer 'Width 20 'number)
+)
+;;; lblScoreTitles
+(add-component harScoreColumnHeaders Label lblScoreTitles (set-and-coerce-property! 'lblScoreTitles 'FontSize 20.0 'number)
+(set-and-coerce-property! 'lblScoreTitles 'Text "Scores" 'text)
+(set-and-coerce-property! 'lblScoreTitles 'Width -2 'number)
+)
+;;; harScoreList
+(add-component varHighScores HorizontalArrangement harScoreList (set-and-coerce-property! 'harScoreList 'Width -2 'number)
+)
+;;; lblNames
+(add-component harScoreList Label lblNames (set-and-coerce-property! 'lblNames 'TextAlignment 2 'number)
+(set-and-coerce-property! 'lblNames 'Width -2 'number)
+)
+;;; lblScoreSpacer
+(add-component harScoreList Label lblScoreSpacer (set-and-coerce-property! 'lblScoreSpacer 'Width 30 'number)
+)
+;;; lblScores
+(add-component harScoreList Label lblScores (set-and-coerce-property! 'lblScores 'Width -2 'number)
+)
+;;; cnvSlider
+(add-component Screen1 Canvas cnvSlider (set-and-coerce-property! 'cnvSlider 'BackgroundColor #xFF000000 'number)
+(set-and-coerce-property! 'cnvSlider 'Height 80 'number)
+(set-and-coerce-property! 'cnvSlider 'PaintColor #xFFFFFFFF 'number)
+(set-and-coerce-property! 'cnvSlider 'Visible #f 'boolean)
+(set-and-coerce-property! 'cnvSlider 'Width -2 'number)
+)
+;;; imgSliderButton
+(add-component cnvSlider ImageSprite imgSliderButton (set-and-coerce-property! 'imgSliderButton 'Height 40 'number)
+(set-and-coerce-property! 'imgSliderButton 'Picture "sliderbutton3.png" 'text)
+(set-and-coerce-property! 'imgSliderButton 'Width 30 'number)
+(set-and-coerce-property! 'imgSliderButton 'X 0 'number)
+(set-and-coerce-property! 'imgSliderButton 'Y 15 'number)
+)
+(define-event imgSliderButton Dragged( startX  startY  prevX  prevY  currentX  currentY )
+ (set-this-form)
+ (if (call-yail-primitive < (*list-for-runtime* (lexical-value currentX)
+ (call-yail-primitive * (*list-for-runtime* (get-property 'Screen1 'Width)
+ .33)
+ '( number number)
+ "\u00d7")
+)
+ '( number number)
+ "<")
+ (begin (set-and-coerce-property! 'imgSliderButton 'X 25 'number)
+
+((get-var ButtonClickCheck) (get-component btnHome)
+)
+
+)
+)
+
+(if (and-delayed   (call-yail-primitive > (*list-for-runtime* (lexical-value currentX)
+ (call-yail-primitive * (*list-for-runtime* (get-property 'Screen1 'Width)
+ .33)
+ '( number number)
+ "\u00d7")
+)
+ '( number number)
+ ">")
+ (call-yail-primitive < (*list-for-runtime* (lexical-value currentX)
+ (call-yail-primitive * (*list-for-runtime* (get-property 'Screen1 'Width)
+ .66)
+ '( number number)
+ "\u00d7")
+)
+ '( number number)
+ "<")
+)
+ (begin (set-and-coerce-property! 'imgSliderButton 'X (call-yail-primitive - (*list-for-runtime* (call-yail-primitive yail-divide (*list-for-runtime* (get-property 'Screen1 'Width)
+ 2)
+ '( number number)
+ "\/")
+ 25)
+ '( number number)
+ "\u2212")
+ 'number)
+
+((get-var ButtonClickCheck) (get-component btnScreen2)
+)
+
+)
+)
+
+(if (call-yail-primitive > (*list-for-runtime* (lexical-value currentX)
+ (call-yail-primitive * (*list-for-runtime* (get-property 'Screen1 'Width)
+ .66)
+ '( number number)
+ "\u00d7")
+)
+ '( number number)
+ ">")
+ (begin (set-and-coerce-property! 'imgSliderButton 'X (call-yail-primitive - (*list-for-runtime* (get-property 'Screen1 'Width)
+ 25)
+ '( number number)
+ "\u2212")
+ 'number)
+
+((get-var ButtonClickCheck) (get-component btnHighScores)
+)
+
+)
+)
+
+)
+;;; tdbMain
+(add-component Screen1 TinyDB tdbMain )
+;;; notMain
+(add-component Screen1 Notifier notMain )
+(define-event notMain AfterChoosing( choice )
+ (set-this-form)
+ (if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value choice)
+ "Quit")
+ '( any any)
+ "=")
+ (begin (call-yail-primitive close-screen (*list-for-runtime*)
+ '() "close screen")
+
+)
+ (begin (call-component-method 'tdbMain 'StoreValue (*list-for-runtime* "EULA" "ACCEPT")
+ '( text any)
+)
+
+)
+)
+
+)
+;;; actMain
+(add-component Screen1 ActivityStarter actMain (set-and-coerce-property! 'actMain 'Action "android.intent.action.VIEW" 'text)
+)
+;;; ftcMain
+(add-component Screen1 FusiontablesControl ftcMain )
+;;; twdHighScore
+(add-component Screen1 TinyWebDB twdHighScore )
+(define-event twdHighScore GotValue( tagFromWebDB  valueFromWebDB )
+ (set-this-form)
+ (if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value valueFromWebDB)
+ "")
+ '( any any)
+ "=")
+ (begin (set-var! PLAYERLIST  (call-yail-primitive make-yail-list (*list-for-runtime*)
+ '()
+ "make a list")
+)
+
+(set-var! SCORELIST  (call-yail-primitive make-yail-list (*list-for-runtime*)
+ '()
+ "make a list")
+)
+
+(get-var *the-null-value*)
+)
+ (begin (if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value tagFromWebDB)
+ (call-yail-primitive string-append (*list-for-runtime* (get-var APPNAME)
+ "PLAYERS")
+ '( text text)
+ "join")
+)
+ '( any any)
+ "=")
+ (begin (set-var! PLAYERLIST  (lexical-value valueFromWebDB)
+)
+
+)
+)
+
+(if (call-yail-primitive yail-equal? (*list-for-runtime* (lexical-value tagFromWebDB)
+ (call-yail-primitive string-append (*list-for-runtime* (get-var APPNAME)
+ "SCORES")
+ '( text text)
+ "join")
+)
+ '( any any)
+ "=")
+ (begin (set-var! SCORELIST  (lexical-value valueFromWebDB)
+)
+
+)
+)
+
+)
+)
+
+)
+;;; sndMain
+(add-component Screen1 Sound sndMain )
+;;; tmrGlobalHighScore
+(add-component Screen1 Clock tmrGlobalHighScore (set-and-coerce-property! 'tmrGlobalHighScore 'TimerEnabled #f 'boolean)
+(set-and-coerce-property! 'tmrGlobalHighScore 'TimerInterval 1800 'number)
+)
+(define-event tmrGlobalHighScore Timer()
+ (set-this-form)
+ (set-and-coerce-property! 'tmrGlobalHighScore 'TimerEnabled #f 'boolean)
+
+((get-var NewScore) (call-yail-primitive string-to-upper-case (*list-for-runtime* (get-property 'txbUserName 'Text)
+)
+ '( text)
+ "upcase")
+ (get-var GameScore)
+)
+
+)
+;;; plyMain
+(add-component Screen1 Player plyMain )
+;;; tmrPrintScore
+(add-component Screen1 Clock tmrPrintScore (set-and-coerce-property! 'tmrPrintScore 'TimerEnabled #f 'boolean)
+)
+(define-event tmrPrintScore Timer()
+ (set-this-form)
+ (set-and-coerce-property! 'tmrPrintScore 'TimerEnabled #f 'boolean)
+
+((get-var PRINTOUT))
+
+)
+;;; tmrSplash
+(add-component Screen1 Clock tmrSplash (set-and-coerce-property! 'tmrSplash 'TimerInterval 10000 'number)
+)
+(define-event tmrSplash Timer()
+ (set-this-form)
+ (set-and-coerce-property-and-check! (get-component varSplash)
+ 'VerticalArrangement 'Visible #f 'boolean)
+
+(set-and-coerce-property-and-check! (get-component varScreenHome)
+ 'VerticalArrangement 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'tmrSplash 'TimerEnabled #f 'boolean)
+
+)
+;;; tmrWebview
+(add-component Screen1 Clock tmrWebview (set-and-coerce-property! 'tmrWebview 'TimerInterval 5000 'number)
+)
+(define-event tmrWebview Timer()
+ (set-this-form)
+ (set-and-coerce-property! 'lblLoading 'Visible #f 'boolean)
+
+(set-and-coerce-property! 'wbvMain 'Visible #t 'boolean)
+
+(set-and-coerce-property! 'tmrWebview 'TimerEnabled #f 'boolean)
+
+)
+(init-runtime  #f)
+
